@@ -55,10 +55,20 @@ export class CustomParser extends BaseParser {
 
   private mapStatus(status: string): 'passed' | 'failed' | 'skipped' {
     switch (status.toLowerCase()) {
-      case 'passed': case 'pass': case 'success': return 'passed';
-      case 'failed': case 'fail': case 'error': return 'failed';
-      case 'skipped': case 'skip': case 'pending': return 'skipped';
-      default: return 'failed';
+      case 'passed':
+      case 'pass':
+      case 'success':
+        return 'passed';
+      case 'failed':
+      case 'fail':
+      case 'error':
+        return 'failed';
+      case 'skipped':
+      case 'skip':
+      case 'pending':
+        return 'skipped';
+      default:
+        return 'failed';
     }
   }
 }

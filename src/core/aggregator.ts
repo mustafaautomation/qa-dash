@@ -40,16 +40,13 @@ export class Aggregator {
       const summary = this.toSummary(result);
       this.currentSummaries.push(summary);
 
-      logger.info(
-        `Ingested ${result.tests.length} tests from ${filePath} (${result.framework})`
-      );
+      logger.info(`Ingested ${result.tests.length} tests from ${filePath} (${result.framework})`);
     }
   }
 
   getDashboard(): DashboardData {
-    const summaries = this.currentSummaries.length > 0
-      ? this.currentSummaries
-      : this.storage.getLatestSummaries();
+    const summaries =
+      this.currentSummaries.length > 0 ? this.currentSummaries : this.storage.getLatestSummaries();
 
     const totalTests = summaries.reduce((s, f) => s + f.total, 0);
     const totalPassed = summaries.reduce((s, f) => s + f.passed, 0);

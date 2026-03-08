@@ -2,7 +2,7 @@ import { HealthScore, FrameworkSummary, TrendPoint } from './types';
 
 export function computeHealthScore(
   summaries: FrameworkSummary[],
-  trends: TrendPoint[]
+  trends: TrendPoint[],
 ): HealthScore {
   // 1. Pass rate (40%)
   const totalTests = summaries.reduce((s, f) => s + f.total, 0);
@@ -39,10 +39,7 @@ export function computeHealthScore(
 
   // Weighted total
   const score =
-    passRateScore * 0.4 +
-    frameworkMinScore * 0.2 +
-    trendScore * 0.2 +
-    errorAbsenceScore * 0.2;
+    passRateScore * 0.4 + frameworkMinScore * 0.2 + trendScore * 0.2 + errorAbsenceScore * 0.2;
 
   return {
     score,

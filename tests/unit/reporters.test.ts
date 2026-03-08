@@ -12,12 +12,37 @@ function makeDashboard(): DashboardData {
   return {
     timestamp: '2025-01-15T10:00:00.000Z',
     frameworks: [
-      { framework: 'playwright', total: 10, passed: 9, failed: 1, skipped: 0, passRate: 0.9, duration: 5000, timestamp: '2025-01-15T10:00:00.000Z' },
-      { framework: 'jest', total: 20, passed: 18, failed: 2, skipped: 0, passRate: 0.9, duration: 3000, timestamp: '2025-01-15T10:00:00.000Z' },
+      {
+        framework: 'playwright',
+        total: 10,
+        passed: 9,
+        failed: 1,
+        skipped: 0,
+        passRate: 0.9,
+        duration: 5000,
+        timestamp: '2025-01-15T10:00:00.000Z',
+      },
+      {
+        framework: 'jest',
+        total: 20,
+        passed: 18,
+        failed: 2,
+        skipped: 0,
+        passRate: 0.9,
+        duration: 3000,
+        timestamp: '2025-01-15T10:00:00.000Z',
+      },
     ],
     tests: [
       { name: 'test-a', suite: 'suite', framework: 'playwright', status: 'passed', duration: 100 },
-      { name: 'test-b', suite: 'suite', framework: 'playwright', status: 'failed', duration: 200, error: 'Element not found' },
+      {
+        name: 'test-b',
+        suite: 'suite',
+        framework: 'playwright',
+        status: 'failed',
+        duration: 200,
+        error: 'Element not found',
+      },
     ],
     healthScore: {
       score: 0.85,

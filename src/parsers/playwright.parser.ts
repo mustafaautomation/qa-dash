@@ -17,7 +17,19 @@ export class PlaywrightParser extends BaseParser {
     const data = JSON.parse(content);
     const tests: UnifiedTestResult[] = [];
 
-    const extract = (spec: { title: string; tests?: Array<{ title: string; status: string; duration: number; results: Array<{ status: string; error?: { message?: string } }> }>; suites?: unknown[] }, suitePath: string): void => {
+    const extract = (
+      spec: {
+        title: string;
+        tests?: Array<{
+          title: string;
+          status: string;
+          duration: number;
+          results: Array<{ status: string; error?: { message?: string } }>;
+        }>;
+        suites?: unknown[];
+      },
+      suitePath: string,
+    ): void => {
       const suite = suitePath ? `${suitePath} > ${spec.title}` : spec.title;
 
       for (const test of spec.tests || []) {
@@ -51,10 +63,18 @@ export class PlaywrightParser extends BaseParser {
 
   private mapStatus(status: string): 'passed' | 'failed' | 'skipped' {
     switch (status) {
-      case 'passed': case 'expected': return 'passed';
-      case 'failed': case 'unexpected': case 'timedOut': return 'failed';
-      case 'skipped': case 'fixme': return 'skipped';
-      default: return 'failed';
+      case 'passed':
+      case 'expected':
+        return 'passed';
+      case 'failed':
+      case 'unexpected':
+      case 'timedOut':
+        return 'failed';
+      case 'skipped':
+      case 'fixme':
+        return 'skipped';
+      default:
+        return 'failed';
     }
   }
 }

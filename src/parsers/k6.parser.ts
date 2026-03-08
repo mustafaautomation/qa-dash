@@ -2,12 +2,15 @@ import { BaseParser, ParsedFrameworkResult } from './base.parser';
 import { UnifiedTestResult } from '../core/types';
 
 interface K6Result {
-  metrics?: Record<string, {
-    type: string;
-    contains?: string;
-    values?: Record<string, number>;
-    thresholds?: Record<string, { ok: boolean }>;
-  }>;
+  metrics?: Record<
+    string,
+    {
+      type: string;
+      contains?: string;
+      values?: Record<string, number>;
+      thresholds?: Record<string, { ok: boolean }>;
+    }
+  >;
   root_group?: {
     name: string;
     checks?: Array<{
@@ -32,7 +35,10 @@ export class K6Parser extends BaseParser {
   canParse(content: string): boolean {
     try {
       const data = JSON.parse(content);
-      return data.metrics !== undefined && (data.root_group !== undefined || data.metrics.http_reqs !== undefined);
+      return (
+        data.metrics !== undefined &&
+        (data.root_group !== undefined || data.metrics.http_reqs !== undefined)
+      );
     } catch {
       return false;
     }
@@ -87,7 +93,7 @@ export class K6Parser extends BaseParser {
   private extractChecks(
     suite: string,
     checks: Array<{ name: string; passes: number; fails: number }>,
-    tests: UnifiedTestResult[]
+    tests: UnifiedTestResult[],
   ): void {
     for (const check of checks) {
       tests.push({

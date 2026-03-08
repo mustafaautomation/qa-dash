@@ -1,6 +1,5 @@
 import * as http from 'http';
 import * as fs from 'fs';
-import * as path from 'path';
 import { logger } from '../utils/logger';
 
 export function startPreviewServer(htmlPath: string, port: number): http.Server {

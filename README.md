@@ -1,8 +1,10 @@
-![CI](https://github.com/mustafaautomation/qa-dash/actions/workflows/ci.yml/badge.svg)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)
-
 # QA Dash
+
+[![CI](https://github.com/mustafaautomation/qa-dash/actions/workflows/ci.yml/badge.svg)](https://github.com/mustafaautomation/qa-dash/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933.svg?logo=node.js&logoColor=white)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)](Dockerfile)
 
 Unified QA dashboard that aggregates test results from Playwright, Jest/Vitest, Newman, k6, JUnit, and custom frameworks into a single quality view.
 

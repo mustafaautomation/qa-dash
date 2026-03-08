@@ -3,11 +3,7 @@ import * as path from 'path';
 import { DashConfig, DEFAULT_CONFIG } from './types';
 import { logger } from '../utils/logger';
 
-const CONFIG_FILES = [
-  'qa-dash.config.json',
-  'qa-dash.config.js',
-  '.qa-dash.json',
-];
+const CONFIG_FILES = ['qa-dash.config.json', 'qa-dash.config.js', '.qa-dash.json'];
 
 export function loadConfig(configPath?: string): DashConfig {
   if (configPath) {

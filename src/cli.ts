@@ -27,7 +27,11 @@ program
   .description('Ingest test results from one or more frameworks')
   .argument('<files...>', 'Test result files')
   .option('-c, --config <path>', 'Path to config file')
-  .option('-r, --reporter <type>', 'Reporter: console, json, html, github (comma-separated)', 'console')
+  .option(
+    '-r, --reporter <type>',
+    'Reporter: console, json, html, github (comma-separated)',
+    'console',
+  )
   .option('-o, --output <dir>', 'Output directory', '.qa-dash/reports')
   .option('-v, --verbose', 'Enable verbose logging')
   .action((files: string[], options) => {
@@ -47,7 +51,11 @@ program
   .command('report')
   .description('Generate report from stored data')
   .option('-c, --config <path>', 'Path to config file')
-  .option('-r, --reporter <type>', 'Reporter: console, json, html, github (comma-separated)', 'console')
+  .option(
+    '-r, --reporter <type>',
+    'Reporter: console, json, html, github (comma-separated)',
+    'console',
+  )
   .option('-o, --output <dir>', 'Output directory', '.qa-dash/reports')
   .option('-v, --verbose', 'Enable verbose logging')
   .action((options) => {

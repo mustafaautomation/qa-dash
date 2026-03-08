@@ -9,7 +9,7 @@ const DEFAULT_COLORS = ['#3fb950', '#f85149', '#d29922', '#58a6ff', '#bc8cff', '
 
 export function pieChart(
   data: Array<{ label: string; value: number }>,
-  opts: ChartOptions = {}
+  opts: ChartOptions = {},
 ): string {
   const { width = 200, height = 200 } = opts;
   const colors = opts.colors || DEFAULT_COLORS;
@@ -39,12 +39,12 @@ export function pieChart(
       paths.push(`<circle cx="${cx}" cy="${cy}" r="${radius}" fill="${color}"/>`);
     } else {
       paths.push(
-        `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z" fill="${color}"/>`
+        `<path d="M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z" fill="${color}"/>`,
       );
     }
 
     legends.push(
-      `<text x="${width + 10}" y="${20 + i * 18}" fill="${color}" font-size="12" font-family="sans-serif">■ ${d.label} (${d.value})</text>`
+      `<text x="${width + 10}" y="${20 + i * 18}" fill="${color}" font-size="12" font-family="sans-serif">■ ${d.label} (${d.value})</text>`,
     );
 
     startAngle = endAngle;
@@ -58,7 +58,7 @@ export function pieChart(
 
 export function barChart(
   data: Array<{ label: string; value: number }>,
-  opts: ChartOptions = {}
+  opts: ChartOptions = {},
 ): string {
   const { width = 400, height = 200, padding = 40 } = opts;
   const colors = opts.colors || DEFAULT_COLORS;
@@ -89,7 +89,7 @@ export function barChart(
 
 export function lineChart(
   data: Array<{ label: string; value: number }>,
-  opts: ChartOptions & { color?: string } = {}
+  opts: ChartOptions & { color?: string } = {},
 ): string {
   const { width = 400, height = 200, padding = 40, color = '#58a6ff' } = opts;
   const chartWidth = width - padding * 2;
@@ -99,11 +99,13 @@ export function lineChart(
 
   const maxVal = Math.max(...data.map((d) => d.value), 1);
 
-  const points = data.map((d, i) => {
-    const x = padding + (i / (data.length - 1)) * chartWidth;
-    const y = padding + chartHeight - (d.value / maxVal) * chartHeight;
-    return `${x},${y}`;
-  }).join(' ');
+  const points = data
+    .map((d, i) => {
+      const x = padding + (i / (data.length - 1)) * chartWidth;
+      const y = padding + chartHeight - (d.value / maxVal) * chartHeight;
+      return `${x},${y}`;
+    })
+    .join(' ');
 
   const areaPoints = `${padding},${padding + chartHeight} ${points} ${padding + chartWidth},${padding + chartHeight}`;
 
@@ -125,7 +127,10 @@ export function lineChart(
 </svg>`;
 }
 
-export function sparkline(values: number[], opts: { width?: number; height?: number; color?: string } = {}): string {
+export function sparkline(
+  values: number[],
+  opts: { width?: number; height?: number; color?: string } = {},
+): string {
   const { width = 80, height = 24, color = '#58a6ff' } = opts;
 
   if (values.length < 2) return '';
@@ -134,11 +139,13 @@ export function sparkline(values: number[], opts: { width?: number; height?: num
   const minVal = Math.min(...values, 0);
   const range = maxVal - minVal || 1;
 
-  const points = values.map((v, i) => {
-    const x = (i / (values.length - 1)) * width;
-    const y = height - ((v - minVal) / range) * height;
-    return `${x},${y}`;
-  }).join(' ');
+  const points = values
+    .map((v, i) => {
+      const x = (i / (values.length - 1)) * width;
+      const y = height - ((v - minVal) / range) * height;
+      return `${x},${y}`;
+    })
+    .join(' ');
 
   return `<svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
   <polyline points="${points}" fill="none" stroke="${color}" stroke-width="1.5"/>

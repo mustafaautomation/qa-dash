@@ -74,10 +74,16 @@ export class JestParser extends BaseParser {
 
   private mapStatus(status: string): 'passed' | 'failed' | 'skipped' {
     switch (status) {
-      case 'passed': return 'passed';
-      case 'failed': return 'failed';
-      case 'pending': case 'skipped': case 'todo': return 'skipped';
-      default: return 'failed';
+      case 'passed':
+        return 'passed';
+      case 'failed':
+        return 'failed';
+      case 'pending':
+      case 'skipped':
+      case 'todo':
+        return 'skipped';
+      default:
+        return 'failed';
     }
   }
 }

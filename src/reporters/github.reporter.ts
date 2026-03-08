@@ -5,11 +5,19 @@ export class GithubReporter {
     const { totals, healthScore } = data;
     const lines: string[] = [];
 
-    const gradeEmoji: Record<string, string> = { A: ':star:', B: ':white_check_mark:', C: ':yellow_circle:', D: ':warning:', F: ':red_circle:' };
+    const gradeEmoji: Record<string, string> = {
+      A: ':star:',
+      B: ':white_check_mark:',
+      C: ':yellow_circle:',
+      D: ':warning:',
+      F: ':red_circle:',
+    };
 
     lines.push('## QA Dashboard Report');
     lines.push('');
-    lines.push(`**Health: ${gradeEmoji[healthScore.grade] || ''} Grade ${healthScore.grade}** (${(healthScore.score * 100).toFixed(0)}%)`);
+    lines.push(
+      `**Health: ${gradeEmoji[healthScore.grade] || ''} Grade ${healthScore.grade}** (${(healthScore.score * 100).toFixed(0)}%)`,
+    );
     lines.push('');
 
     lines.push('| Metric | Value |');
@@ -28,7 +36,9 @@ export class GithubReporter {
       lines.push('|-----------|-------|--------|--------|-----------|');
 
       for (const fw of data.frameworks) {
-        lines.push(`| ${fw.framework} | ${fw.total} | ${fw.passed} | ${fw.failed} | ${(fw.passRate * 100).toFixed(1)}% |`);
+        lines.push(
+          `| ${fw.framework} | ${fw.total} | ${fw.passed} | ${fw.failed} | ${(fw.passRate * 100).toFixed(1)}% |`,
+        );
       }
       lines.push('');
     }

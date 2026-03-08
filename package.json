@@ -4,6 +4,12 @@
   "description": "Unified QA dashboard that aggregates results from Playwright, Jest, Newman, k6, JUnit, and more",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js"
+    }
+  },
   "bin": {
     "qa-dash": "dist/cli.js"
   },
@@ -11,23 +17,19 @@
     "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"**/*.ts\"",
+    "format:check": "prettier --check \"**/*.ts\"",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
-  "keywords": [
-    "qa",
-    "dashboard",
-    "testing",
-    "playwright",
-    "jest",
-    "newman",
-    "k6",
-    "junit",
-    "aggregation",
-    "reporting"
-  ],
-  "author": "Muhammad Mustafa",
+  "keywords": ["qa", "dashboard", "testing", "playwright", "jest", "newman", "k6", "junit", "aggregation", "reporting"],
+  "author": "Quvantic <info@quvantic.com> (https://quvantic.com)",
   "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/mustafaautomation/qa-dash.git" },
+  "homepage": "https://github.com/mustafaautomation/qa-dash#readme",
+  "bugs": { "url": "https://github.com/mustafaautomation/qa-dash/issues" },
   "dependencies": {
     "commander": "^12.1.0",
     "dotenv": "^16.4.7",
@@ -36,13 +38,14 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.0",
     "typescript": "^5.7.0",
-    "vitest": "^2.1.0"
+    "vitest": "^3.0.0"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "files": [
-    "dist"
-  ]
+  "engines": { "node": ">=18.0.0" },
+  "files": ["dist"]
 }

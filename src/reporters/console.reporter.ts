@@ -34,11 +34,21 @@ export class ConsoleReporter {
     const { grade, score, breakdown } = data.healthScore;
     const color = GRADE_COLORS[grade] || WHITE;
 
-    console.log(`  ${BOLD}Health Score:${RESET}  ${color}${BOLD}${grade}${RESET} ${DIM}(${(score * 100).toFixed(0)}%)${RESET}`);
-    console.log(`    Pass Rate:          ${this.bar(breakdown.passRate.score)} ${(breakdown.passRate.score * 100).toFixed(0)}%`);
-    console.log(`    Framework Minimums: ${this.bar(breakdown.frameworkMinimums.score)} ${(breakdown.frameworkMinimums.score * 100).toFixed(0)}%`);
-    console.log(`    Trend Direction:    ${this.bar(breakdown.trendDirection.score)} ${(breakdown.trendDirection.score * 100).toFixed(0)}%`);
-    console.log(`    Error Absence:      ${this.bar(breakdown.errorAbsence.score)} ${(breakdown.errorAbsence.score * 100).toFixed(0)}%`);
+    console.log(
+      `  ${BOLD}Health Score:${RESET}  ${color}${BOLD}${grade}${RESET} ${DIM}(${(score * 100).toFixed(0)}%)${RESET}`,
+    );
+    console.log(
+      `    Pass Rate:          ${this.bar(breakdown.passRate.score)} ${(breakdown.passRate.score * 100).toFixed(0)}%`,
+    );
+    console.log(
+      `    Framework Minimums: ${this.bar(breakdown.frameworkMinimums.score)} ${(breakdown.frameworkMinimums.score * 100).toFixed(0)}%`,
+    );
+    console.log(
+      `    Trend Direction:    ${this.bar(breakdown.trendDirection.score)} ${(breakdown.trendDirection.score * 100).toFixed(0)}%`,
+    );
+    console.log(
+      `    Error Absence:      ${this.bar(breakdown.errorAbsence.score)} ${(breakdown.errorAbsence.score * 100).toFixed(0)}%`,
+    );
     console.log();
   }
 
@@ -47,7 +57,9 @@ export class ConsoleReporter {
     const rateColor = totals.passRate >= 0.9 ? GREEN : totals.passRate >= 0.7 ? YELLOW : RED;
 
     console.log(`  ${BOLD}Totals:${RESET}`);
-    console.log(`    Tests:     ${WHITE}${totals.total}${RESET}  (${GREEN}${totals.passed} passed${RESET}, ${RED}${totals.failed} failed${RESET}, ${DIM}${totals.skipped} skipped${RESET})`);
+    console.log(
+      `    Tests:     ${WHITE}${totals.total}${RESET}  (${GREEN}${totals.passed} passed${RESET}, ${RED}${totals.failed} failed${RESET}, ${DIM}${totals.skipped} skipped${RESET})`,
+    );
     console.log(`    Pass Rate: ${rateColor}${(totals.passRate * 100).toFixed(1)}%${RESET}`);
     console.log(`    Duration:  ${DIM}${totals.totalDuration}ms${RESET}`);
     console.log();
@@ -57,14 +69,21 @@ export class ConsoleReporter {
     if (data.frameworks.length === 0) return;
 
     console.log(`  ${BOLD}Frameworks:${RESET}`);
-    const header = '    ' + 'Framework'.padEnd(14) + 'Tests'.padEnd(8) + 'Passed'.padEnd(8) + 'Failed'.padEnd(8) + 'Rate'.padEnd(10) + 'Duration';
+    const header =
+      '    ' +
+      'Framework'.padEnd(14) +
+      'Tests'.padEnd(8) +
+      'Passed'.padEnd(8) +
+      'Failed'.padEnd(8) +
+      'Rate'.padEnd(10) +
+      'Duration';
     console.log(`${DIM}${header}${RESET}`);
     console.log(`${DIM}    ${'─'.repeat(64)}${RESET}`);
 
     for (const fw of data.frameworks) {
       const rateColor = fw.passRate >= 0.9 ? GREEN : fw.passRate >= 0.7 ? YELLOW : RED;
       console.log(
-        `    ${fw.framework.padEnd(14)}${String(fw.total).padEnd(8)}${GREEN}${String(fw.passed).padEnd(8)}${RESET}${RED}${String(fw.failed).padEnd(8)}${RESET}${rateColor}${(fw.passRate * 100).toFixed(1).padEnd(10)}%${RESET}${DIM}${fw.duration}ms${RESET}`
+        `    ${fw.framework.padEnd(14)}${String(fw.total).padEnd(8)}${GREEN}${String(fw.passed).padEnd(8)}${RESET}${RED}${String(fw.failed).padEnd(8)}${RESET}${rateColor}${(fw.passRate * 100).toFixed(1).padEnd(10)}%${RESET}${DIM}${fw.duration}ms${RESET}`,
       );
     }
     console.log();
@@ -76,7 +95,9 @@ export class ConsoleReporter {
 
     console.log(`  ${BOLD}${RED}Failed Tests (${failures.length}):${RESET}`);
     for (const test of failures.slice(0, 10)) {
-      console.log(`    ${RED}x${RESET} [${test.framework}] ${test.name} ${DIM}(${test.suite})${RESET}`);
+      console.log(
+        `    ${RED}x${RESET} [${test.framework}] ${test.name} ${DIM}(${test.suite})${RESET}`,
+      );
       if (test.error) {
         console.log(`      ${DIM}${test.error.substring(0, 100)}${RESET}`);
       }
