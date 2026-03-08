@@ -1,0 +1,20 @@
+{
+  "numPassedTests": 4,
+  "numFailedTests": 1,
+  "numTotalTests": 5,
+  "startTime": 1705312800000,
+  "testResults": [{
+    "testFilePath": "/tests/utils.test.ts",
+    "testResults": [
+      { "ancestorTitles": ["Utils"], "title": "should format date", "status": "passed", "duration": 5 },
+      { "ancestorTitles": ["Utils"], "title": "should parse JSON", "status": "passed", "duration": 3 },
+      { "ancestorTitles": ["Utils"], "title": "should validate email", "status": "failed", "duration": 8, "failureMessages": ["Expected true, got false"] }
+    ]
+  }, {
+    "testFilePath": "/tests/api.test.ts",
+    "testResults": [
+      { "ancestorTitles": ["API"], "title": "should fetch users", "status": "passed", "duration": 120 },
+      { "ancestorTitles": ["API"], "title": "should create user", "status": "passed", "duration": 95 }
+    ]
+  }]
+}

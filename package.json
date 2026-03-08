@@ -1,0 +1,48 @@
+{
+  "name": "qa-dash",
+  "version": "1.0.0",
+  "description": "Unified QA dashboard that aggregates results from Playwright, Jest, Newman, k6, JUnit, and more",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "qa-dash": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "qa",
+    "dashboard",
+    "testing",
+    "playwright",
+    "jest",
+    "newman",
+    "k6",
+    "junit",
+    "aggregation",
+    "reporting"
+  ],
+  "author": "Muhammad Mustafa",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.7",
+    "fast-glob": "^3.3.2",
+    "fast-xml-parser": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist"
+  ]
+}

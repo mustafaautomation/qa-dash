@@ -1,0 +1,25 @@
+{
+  "collection": { "info": { "name": "User API" } },
+  "run": {
+    "timings": { "started": 1705312800000, "completed": 1705312805000 },
+    "executions": [
+      {
+        "item": { "name": "GET /users" },
+        "assertions": [
+          { "assertion": "Status code is 200" },
+          { "assertion": "Response time < 500ms" }
+        ],
+        "response": { "responseTime": 120 }
+      },
+      {
+        "item": { "name": "POST /users" },
+        "assertions": [
+          { "assertion": "Status code is 201" },
+          { "assertion": "Has user ID", "error": { "message": "expected response to have property 'id'" } }
+        ],
+        "response": { "responseTime": 350 }
+      }
+    ],
+    "stats": { "assertions": { "total": 4, "pending": 0, "failed": 1 } }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "qa_dash": true,
+  "timestamp": "2025-01-15T10:00:00.000Z",
+  "tests": [
+    { "name": "Visual regression - homepage", "suite": "Visual", "status": "passed", "duration": 2500 },
+    { "name": "Visual regression - dashboard", "suite": "Visual", "status": "failed", "duration": 3000, "error": "Pixel diff exceeds threshold" },
+    { "name": "Accessibility - WCAG 2.1", "suite": "A11y", "status": "passed", "duration": 800 }
+  ]
+}

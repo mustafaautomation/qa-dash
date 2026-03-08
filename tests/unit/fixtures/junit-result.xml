@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="3" failures="1">
+  <testsuite name="com.app.AuthTest" tests="3" failures="1" time="3.5" timestamp="2025-01-15T10:00:00">
+    <testcase name="testLogin" classname="com.app.AuthTest" time="1.2"/>
+    <testcase name="testLogout" classname="com.app.AuthTest" time="0.8"/>
+    <testcase name="testExpiry" classname="com.app.AuthTest" time="1.5">
+      <failure message="Session not expired">Expected session to be expired</failure>
+    </testcase>
+  </testsuite>
+</testsuites>
