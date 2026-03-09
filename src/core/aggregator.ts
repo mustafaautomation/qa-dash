@@ -26,14 +26,13 @@ export class Aggregator {
 
   ingest(filePaths: string[]): void {
     for (const filePath of filePaths) {
-      const resolved = fs.realpathSync(filePath);
-      if (this.seenFiles.has(resolved)) {
-        logger.warn(`Skipping duplicate file: ${filePath}`);
-        continue;
-      }
-      this.seenFiles.add(resolved);
-
       try {
+        const resolved = fs.realpathSync(filePath);
+        if (this.seenFiles.has(resolved)) {
+          logger.warn(`Skipping duplicate file: ${filePath}`);
+          continue;
+        }
+        this.seenFiles.add(resolved);
         const content = fs.readFileSync(filePath, 'utf-8');
         const parser = this.registry.detect(content);
 

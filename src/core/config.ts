@@ -28,7 +28,11 @@ function readConfigFile(filePath: string): DashConfig {
 
   if (ext === '.json') {
     const raw = fs.readFileSync(filePath, 'utf-8');
-    userConfig = JSON.parse(raw);
+    try {
+      userConfig = JSON.parse(raw);
+    } catch {
+      throw new Error(`Invalid JSON in config file: ${filePath}`);
+    }
   } else {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     userConfig = require(path.resolve(filePath));

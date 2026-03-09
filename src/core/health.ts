@@ -4,6 +4,19 @@ export function computeHealthScore(
   summaries: FrameworkSummary[],
   trends: TrendPoint[],
 ): HealthScore {
+  if (summaries.length === 0) {
+    return {
+      score: 0,
+      grade: 'F',
+      breakdown: {
+        passRate: { score: 0, weight: 0.4 },
+        frameworkMinimums: { score: 0, weight: 0.2 },
+        trendDirection: { score: 0, weight: 0.2 },
+        coverageHealth: { score: 0, weight: 0.2 },
+      },
+    };
+  }
+
   const totalTests = summaries.reduce((s, f) => s + f.total, 0);
   const totalPassed = summaries.reduce((s, f) => s + f.passed, 0);
   const totalSkipped = summaries.reduce((s, f) => s + f.skipped, 0);
