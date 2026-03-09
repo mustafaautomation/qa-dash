@@ -47,7 +47,7 @@ export class ConsoleReporter {
       `    Trend Direction:    ${this.bar(breakdown.trendDirection.score)} ${(breakdown.trendDirection.score * 100).toFixed(0)}%`,
     );
     console.log(
-      `    Error Absence:      ${this.bar(breakdown.errorAbsence.score)} ${(breakdown.errorAbsence.score * 100).toFixed(0)}%`,
+      `    Coverage Health:    ${this.bar(breakdown.coverageHealth.score)} ${(breakdown.coverageHealth.score * 100).toFixed(0)}%`,
     );
     console.log();
   }
@@ -109,7 +109,8 @@ export class ConsoleReporter {
   }
 
   private bar(value: number): string {
-    const filled = Math.round(value * 10);
+    const clamped = Math.max(0, Math.min(1, value));
+    const filled = Math.round(clamped * 10);
     const empty = 10 - filled;
     const color = value >= 0.8 ? GREEN : value >= 0.6 ? YELLOW : RED;
     return `${color}${'█'.repeat(filled)}${DIM}${'░'.repeat(empty)}${RESET}`;

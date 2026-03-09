@@ -35,9 +35,14 @@ export class JsonStorage extends BaseStorage {
     }
 
     if (fs.existsSync(this.filePath)) {
-      const raw = fs.readFileSync(this.filePath, 'utf-8');
-      this.data = JSON.parse(raw);
-      logger.debug(`Storage loaded from ${this.filePath}`);
+      try {
+        const raw = fs.readFileSync(this.filePath, 'utf-8');
+        this.data = JSON.parse(raw);
+        logger.debug(`Storage loaded from ${this.filePath}`);
+      } catch (err) {
+        logger.warn(`Corrupt storage file, starting fresh: ${(err as Error).message}`);
+        this.data = { runs: [] };
+      }
     }
   }
 

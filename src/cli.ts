@@ -2,7 +2,6 @@
 
 import { Command } from 'commander';
 import * as path from 'path';
-import dotenv from 'dotenv';
 import { loadConfig, writeDefaultConfig } from './core/config';
 import { Aggregator } from './core/aggregator';
 import { ConsoleReporter } from './reporters/console.reporter';
@@ -13,14 +12,12 @@ import { startPreviewServer } from './server/preview';
 import { setLogLevel } from './utils/logger';
 import { DashboardData } from './core/types';
 
-dotenv.config();
-
 const program = new Command();
 
 program
   .name('qa-dash')
   .description('Unified QA dashboard aggregating results from multiple test frameworks')
-  .version('1.0.0');
+  .version('2.0.0');
 
 program
   .command('ingest')
@@ -132,6 +129,8 @@ function runReporters(reporterStr: string, outputDir: string, data: DashboardDat
         console.log(md);
         break;
       }
+      default:
+        console.error(`Unknown reporter type: "${type}". Valid: console, json, html, github`);
     }
   }
 }

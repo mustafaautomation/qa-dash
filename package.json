@@ -1,6 +1,6 @@
 {
   "name": "qa-dash",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Unified QA dashboard that aggregates results from Playwright, Jest, Newman, k6, JUnit, and more",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,8 +32,6 @@
   "bugs": { "url": "https://github.com/mustafaautomation/qa-dash/issues" },
   "dependencies": {
     "commander": "^12.1.0",
-    "dotenv": "^16.4.7",
-    "fast-glob": "^3.3.2",
     "fast-xml-parser": "^4.5.1"
   },
   "devDependencies": {

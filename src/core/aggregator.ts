@@ -12,6 +12,7 @@ export class Aggregator {
   private storage: JsonStorage;
   private currentTests: UnifiedTestResult[] = [];
   private currentSummaries: FrameworkSummary[] = [];
+  private seenFiles = new Set<string>();
 
   constructor(config: DashConfig) {
     this.config = config;
@@ -25,22 +26,35 @@ export class Aggregator {
 
   ingest(filePaths: string[]): void {
     for (const filePath of filePaths) {
-      const content = fs.readFileSync(filePath, 'utf-8');
-      const parser = this.registry.detect(content);
-
-      if (!parser) {
-        logger.warn(`Could not detect framework for: ${filePath}`);
+      const resolved = fs.realpathSync(filePath);
+      if (this.seenFiles.has(resolved)) {
+        logger.warn(`Skipping duplicate file: ${filePath}`);
         continue;
       }
+      this.seenFiles.add(resolved);
 
-      const result: ParsedFrameworkResult = parser.parse(content);
-      this.storage.storeRun(result);
-      this.currentTests.push(...result.tests);
+      try {
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const parser = this.registry.detect(content);
 
-      const summary = this.toSummary(result);
-      this.currentSummaries.push(summary);
+        if (!parser) {
+          logger.warn(`Could not detect framework for: ${filePath}`);
+          continue;
+        }
 
-      logger.info(`Ingested ${result.tests.length} tests from ${filePath} (${result.framework})`);
+        const result: ParsedFrameworkResult = parser.parse(content);
+        this.storage.storeRun(result);
+        this.currentTests.push(...result.tests);
+
+        const summary = this.toSummary(result);
+        this.currentSummaries.push(summary);
+
+        logger.info(
+          `Ingested ${result.tests.length} tests from ${filePath} (${result.framework})`,
+        );
+      } catch (err) {
+        logger.error(`Failed to ingest ${filePath}: ${(err as Error).message}`);
+      }
     }
   }
 

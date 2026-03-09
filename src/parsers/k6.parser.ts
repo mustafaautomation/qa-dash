@@ -96,13 +96,15 @@ export class K6Parser extends BaseParser {
     tests: UnifiedTestResult[],
   ): void {
     for (const check of checks) {
+      const total = check.passes + check.fails;
+      const passRate = total > 0 ? check.passes / total : 0;
       tests.push({
         name: check.name,
         suite,
         framework: 'k6',
-        status: check.fails === 0 ? 'passed' : 'failed',
+        status: passRate >= 0.95 ? 'passed' : 'failed',
         duration: 0,
-        metadata: { passes: check.passes, fails: check.fails },
+        metadata: { passes: check.passes, fails: check.fails, passRate },
       });
     }
   }

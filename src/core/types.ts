@@ -43,7 +43,7 @@ export interface HealthScore {
     passRate: { score: number; weight: number };
     frameworkMinimums: { score: number; weight: number };
     trendDirection: { score: number; weight: number };
-    errorAbsence: { score: number; weight: number };
+    coverageHealth: { score: number; weight: number };
   };
 }
 

@@ -33,12 +33,13 @@ export class PlaywrightParser extends BaseParser {
       const suite = suitePath ? `${suitePath} > ${spec.title}` : spec.title;
 
       for (const test of spec.tests || []) {
-        const lastResult = test.results[test.results.length - 1];
+        const lastResult =
+          test.results.length > 0 ? test.results[test.results.length - 1] : undefined;
         tests.push({
           name: test.title,
           suite,
           framework: 'playwright',
-          status: this.mapStatus(test.status || lastResult?.status),
+          status: this.mapStatus(test.status || lastResult?.status || 'skipped'),
           duration: test.duration || 0,
           error: lastResult?.error?.message,
         });

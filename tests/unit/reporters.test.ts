@@ -51,7 +51,7 @@ function makeDashboard(): DashboardData {
         passRate: { score: 0.9, weight: 0.4 },
         frameworkMinimums: { score: 1, weight: 0.2 },
         trendDirection: { score: 0.5, weight: 0.2 },
-        errorAbsence: { score: 0.9, weight: 0.2 },
+        coverageHealth: { score: 0.9, weight: 0.2 },
       },
     },
     totals: { total: 30, passed: 27, failed: 3, skipped: 0, passRate: 0.9, totalDuration: 8000 },

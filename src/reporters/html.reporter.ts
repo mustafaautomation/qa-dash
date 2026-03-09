@@ -24,9 +24,10 @@ export class HtmlReporter {
 
   private generateHtml(data: DashboardData): string {
     const { totals, healthScore } = data;
-    const gradeColor = { A: '#3fb950', B: '#3fb950', C: '#d29922', D: '#d29922', F: '#f85149' }[
-      healthScore.grade
-    ];
+    const gradeColor =
+      { A: '#3fb950', B: '#3fb950', C: '#d29922', D: '#d29922', F: '#f85149' }[
+        healthScore.grade
+      ] || '#8b949e';
     const rateClass = totals.passRate >= 0.9 ? 'pass' : totals.passRate >= 0.7 ? 'warn' : 'fail';
 
     const pieSvg = pieChart(data.frameworks.map((f) => ({ label: f.framework, value: f.total })));
@@ -132,7 +133,7 @@ export class HtmlReporter {
       ${this.renderBreakdownItem('Pass Rate', healthScore.breakdown.passRate.score, '40%')}
       ${this.renderBreakdownItem('Framework Mins', healthScore.breakdown.frameworkMinimums.score, '20%')}
       ${this.renderBreakdownItem('Trend Direction', healthScore.breakdown.trendDirection.score, '20%')}
-      ${this.renderBreakdownItem('Error Absence', healthScore.breakdown.errorAbsence.score, '20%')}
+      ${this.renderBreakdownItem('Coverage Health', healthScore.breakdown.coverageHealth.score, '20%')}
     </div>
   </div>
 

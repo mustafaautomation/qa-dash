@@ -61,7 +61,7 @@ describe('computeHealthScore', () => {
       score.breakdown.passRate.weight +
       score.breakdown.frameworkMinimums.weight +
       score.breakdown.trendDirection.weight +
-      score.breakdown.errorAbsence.weight;
+      score.breakdown.coverageHealth.weight;
     expect(totalWeight).toBe(1);
   });
 

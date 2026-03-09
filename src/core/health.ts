@@ -4,9 +4,11 @@ export function computeHealthScore(
   summaries: FrameworkSummary[],
   trends: TrendPoint[],
 ): HealthScore {
-  // 1. Pass rate (40%)
   const totalTests = summaries.reduce((s, f) => s + f.total, 0);
   const totalPassed = summaries.reduce((s, f) => s + f.passed, 0);
+  const totalSkipped = summaries.reduce((s, f) => s + f.skipped, 0);
+
+  // 1. Pass rate (40%)
   const overallPassRate = totalTests > 0 ? totalPassed / totalTests : 0;
   const passRateScore = overallPassRate;
 
@@ -33,13 +35,13 @@ export function computeHealthScore(
     }
   }
 
-  // 4. Error absence (20%) — lower failure count is better
-  const totalFailed = summaries.reduce((s, f) => s + f.failed, 0);
-  const errorAbsenceScore = totalTests > 0 ? 1 - Math.min(totalFailed / totalTests, 1) : 1;
+  // 4. Test coverage health (20%) — penalize high skip rates (signals disabled/ignored tests)
+  const skipRate = totalTests > 0 ? totalSkipped / totalTests : 0;
+  const coverageScore = Math.max(1 - skipRate * 2, 0); // >50% skipped → 0
 
   // Weighted total
   const score =
-    passRateScore * 0.4 + frameworkMinScore * 0.2 + trendScore * 0.2 + errorAbsenceScore * 0.2;
+    passRateScore * 0.4 + frameworkMinScore * 0.2 + trendScore * 0.2 + coverageScore * 0.2;
 
   return {
     score,
@@ -48,7 +50,7 @@ export function computeHealthScore(
       passRate: { score: passRateScore, weight: 0.4 },
       frameworkMinimums: { score: frameworkMinScore, weight: 0.2 },
       trendDirection: { score: trendScore, weight: 0.2 },
-      errorAbsence: { score: errorAbsenceScore, weight: 0.2 },
+      coverageHealth: { score: coverageScore, weight: 0.2 },
     },
   };
 }
