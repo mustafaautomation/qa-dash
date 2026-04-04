@@ -25,9 +25,8 @@ export class HtmlReporter {
   private generateHtml(data: DashboardData): string {
     const { totals, healthScore } = data;
     const gradeColor =
-      { A: '#3fb950', B: '#3fb950', C: '#d29922', D: '#d29922', F: '#f85149' }[
-        healthScore.grade
-      ] || '#8b949e';
+      { A: '#3fb950', B: '#3fb950', C: '#d29922', D: '#d29922', F: '#f85149' }[healthScore.grade] ||
+      '#8b949e';
     const rateClass = totals.passRate >= 0.9 ? 'pass' : totals.passRate >= 0.7 ? 'warn' : 'fail';
 
     const pieSvg = pieChart(data.frameworks.map((f) => ({ label: f.framework, value: f.total })));

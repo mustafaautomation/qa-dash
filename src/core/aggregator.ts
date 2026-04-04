@@ -48,9 +48,7 @@ export class Aggregator {
         const summary = this.toSummary(result);
         this.currentSummaries.push(summary);
 
-        logger.info(
-          `Ingested ${result.tests.length} tests from ${filePath} (${result.framework})`,
-        );
+        logger.info(`Ingested ${result.tests.length} tests from ${filePath} (${result.framework})`);
       } catch (err) {
         logger.error(`Failed to ingest ${filePath}: ${(err as Error).message}`);
       }
