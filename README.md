@@ -22,7 +22,10 @@ QA teams juggle 5-10 tools with no single quality view. QA Dash auto-detects you
 ## Quick Start
 
 ```bash
-npm install qa-dash
+# Not published to npm; install from source
+git clone https://github.com/mustafaautomation/qa-dash.git
+cd qa-dash
+npm ci && npm run build && npm link   # makes the `qa-dash` command available
 
 # Initialize config
 npx qa-dash init
@@ -103,6 +106,7 @@ Weighted formula:
 ## Programmatic Usage
 
 ```typescript
+// after `npm link qa-dash` in your project (the package is not on npm)
 import { Aggregator, DEFAULT_CONFIG } from 'qa-dash';
 
 const aggregator = new Aggregator(DEFAULT_CONFIG);
